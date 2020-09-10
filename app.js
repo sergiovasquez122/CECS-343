@@ -120,11 +120,11 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
             fs.stat(itemPath, (e, stats) => {
                 // use stats to find out
                 // if the current item is a dir
-                if (stats.isDirectory()) {
+                if (stats.isDirectory() && item[0] !== ".") {
                     // if so walk that too, by calling this
                     // method recursively
                     clone(itemPath, source_directory, target_directory, manifest_file_name);
-                } else if(stats.isFile()){
+                } else if(stats.isFile() && item[0] !== "."){
                     fs.readFile(itemPath, (error, buffer) => {
                         if (error) throw error;
                         // In order for my tree traversal to work I need to know the absolute paths from the root
@@ -147,8 +147,15 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
                         const artificial_id_of_file = artificial_id_generator(check_sum_of_string(string_without_line_breaks), string_without_line_breaks.length, check_sum_of_string(final_path));
                         const file_extension = path.extname(itemPath);
                         const target_path = path.join(target_directory, artificial_id_of_file + file_extension);
-                        fs.appendFileSync(path.join(source_directory, manifest_file_name), final_path + " " + artificial_id_of_file + file_extension + '\n');
-                        fs.copyFileSync(itemPath, target_path);
+                        fs.appendFile(path.join(source_directory, manifest_file_name), final_path + " " + artificial_id_of_file + file_extension + '\n', function (err){
+                            if(err) console.log(err);
+                        });
+                        fs.appendFile(path.join(target_directory, manifest_file_name), final_path + " " + artificial_id_of_file + file_extension + '\n', function (err){
+                            if(err) console.log(err);
+                        });
+                        fs.copyFile(itemPath, target_path, function (err){
+                            if(err) console.log(err);
+                        });
                     });
                 }
             });
@@ -164,12 +171,16 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
 let clone_directory = function (source_directory, target_directory){
     mkdirRecursive(target_directory);
     let manifest_file_name = ".man-1.txt";
-    fs.writeFileSync(path.join(source_directory, manifest_file_name), getTimeStamp() + '\n');
+    fs.writeFile(path.join(source_directory, manifest_file_name), getTimeStamp() + '\n', function (err){
+        if(err) console.log(err);
+    });
+    fs.writeFile(path.join(target_directory, manifest_file_name), getTimeStamp() + '\n', function (err){
+       if(err) console.log(err);
+    });
     clone(source_directory, source_directory, target_directory, manifest_file_name);
-    fs.copyFileSync(path.join(source_directory, manifest_file_name),  path.join(target_directory, manifest_file_name));
 }
 
 //mkdirRecursive("/home/sergio/repo/mypt");
 //walk("/home/sergio/bot/", "/home/sergio/bot/");
 //mkdirRecursive("/home/sergio/repo/mypt");
-clone_directory("/home/sergio/bot", "/home/sergio/repo/mypt/");
+clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt/");
