@@ -1,12 +1,20 @@
 //requiring path and fs modules
 const path = require('path');
 const fs = require('fs');
-// Code to get a timestamp to readable human format as described in https://stackoverflow.com/questions/40761205/javascript-convert-timestamp-to-human-readable-date
+/**
+ * gets the time during the call of the function in a human-readable format
+ * @returns {Date} A date object that will contain the current date
+ */
 const getTimeStamp = function (){
     const timestamp = Number(new Date());
     return new Date(timestamp);
 }
 
+/**
+ * Given a string compute the checksum of all the content
+ * @param str the string that checksum will be computed on
+ * @returns {number} a number between the range [0, 9999]
+ */
 function check_sum_of_string(str) {
     let sum = 0;
     let counter = 0;
