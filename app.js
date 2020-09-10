@@ -7,8 +7,6 @@ const getTimeStamp = function (){
     return new Date(timestamp);
 }
 
-console.log("Current time is: " + getTimeStamp());
-
 function check_sum_of_string(str) {
     let sum = 0;
     let counter = 0;
@@ -81,14 +79,6 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
                         const final_path = path.join(source_directory_relative, relative_path_from_source_to_item_directory) + "/";
                         // I am doing this because in siska's example he doesn't count \n or \r in the computation of the check sum
                         const string_without_line_breaks = buffer.toString().replace(/(\r\n|\n|\r)/gm,"");
-                        // this will tell us the current file being operated on
-                        console.log("The current file being operated on is: " + item);
-                        // this will tell us the number of bytes that the file stores
-                        console.log("The file contained", string_without_line_breaks.length, "bytes.");
-                        // this will go through all the content of the file and calculate the check_sum
-                        console.log("The check sum of the file:", item, "is",check_sum_of_string(string_without_line_breaks));
-                        // compute the checksum of the relative path to the file
-                        console.log("The check sum of the relative path:", final_path, "is", check_sum_of_string(final_path));
                         // generate the artificial id and append the original extension
                         const artificial_id_of_file = artificial_id_generator(check_sum_of_string(string_without_line_breaks), string_without_line_breaks.length, check_sum_of_string(final_path));
                         const file_extension = path.extname(itemPath);
