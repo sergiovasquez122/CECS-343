@@ -107,8 +107,9 @@ function mkdirRecursive(directory) {
  * @param dir the current directory that is being operated on in the recursive call, given in absolute path
  * @param source_directory the directory in which the first recursive call is taken place, given in absolute path
  * @param target_directory the directory in which the all the files of the source directory will go to.
+ * @param manifest_file_name name of the file that will contain the snapshot information
  */
-let clone = function (dir, source_directory, target_directory) {
+let clone = function (dir, source_directory, target_directory, manifest_file_name) {
     // get the contents of dir
     fs.readdir(dir, (e, items) => {
         // for each item in the contents
@@ -122,7 +123,7 @@ let clone = function (dir, source_directory, target_directory) {
                 if (stats.isDirectory()) {
                     // if so walk that too, by calling this
                     // method recursively
-                    clone(itemPath, source_directory, target_directory);
+                    clone(itemPath, source_directory, target_directory, manifest_file_name);
                 } else if(stats.isFile()){
                     fs.readFile(itemPath, (error, buffer) => {
                         if (error) throw error;
@@ -161,10 +162,15 @@ let clone = function (dir, source_directory, target_directory) {
  */
 let clone_directory = function (source_directory, target_directory){
     mkdirRecursive(target_directory);
-    clone(source_directory, source_directory, target_directory);
+    let manifest_file_name = ".man-1.rc";
+    fs.writeFile(manifest_file_name, getTimeStamp() + '\n', function (err){
+        if(err) return console.log(err);
+    });
+    fs.copyFileSync(path.join(manifest_file_name), path.join(manifest_file_name));
+    clone(source_directory, source_directory, target_directory, manifest_file_name);
 }
 
 //mkdirRecursive("/home/sergio/repo/mypt");
 //walk("/home/sergio/bot/", "/home/sergio/bot/");
 //mkdirRecursive("/home/sergio/repo/mypt");
-clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt2/");
+clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt/");
