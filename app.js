@@ -98,5 +98,63 @@ function mkdirRecursive(directory) {
 }
 
 //mkdirRecursive("/home/sergio/repo/mypt");
-walk("/home/sergio/bot/", "/home/sergio/bot/");
+//walk("/home/sergio/bot/", "/home/sergio/bot/");
 //walk("/home/sergio/mypt2/", "/home/sergio/mypt2/");
+
+/**
+ * Does a depth-first search traversal computing the check sum of files, the relative path from the source and the byte size of the files
+ * and then creating an artificial id for the file and copying it into the target directory
+ * @param dir the current directory that is being operated on in the recursive call, given in absolute path
+ * @param source_directory the directory in which the first recursive call is taken place, given in absolute path
+ * @param target_directory the directory in which the all the files of the source directory will go to.
+ */
+let clone = function (dir, source_directory, target_directory) {
+    // get the contents of dir
+    fs.readdir(dir, (e, items) => {
+        // for each item in the contents
+        items.forEach((item) => {
+            // get the item path
+            let itemPath = path.join(dir, item);
+            // get the stats of the item
+            fs.stat(itemPath, (e, stats) => {
+                // use stats to find out
+                // if the current item is a dir
+                if (stats.isDirectory()) {
+                    // if so walk that too, by calling this
+                    // method recursively
+                    clone(itemPath, source_directory, target_directory);
+                } else if(stats.isFile()){
+                    fs.readFile(itemPath, (error, buffer) => {
+                        if (error) throw error;
+                        // In order for my tree traversal to work I need to know the absolute paths from the root
+                        // With this I cutoff the parts that are above the source directory file and
+                        // join it with the directory that contains the item.
+                        const source_directory_relative = path.basename(source_directory);
+                        const relative_path_from_source_to_item_directory = path.relative(source_directory, dir);
+                        const final_path = path.join(source_directory_relative, relative_path_from_source_to_item_directory) + "/";
+                        // I am doing this because in siska's example he doesn't count \n or \r in the computation of the check sum
+                        const string_without_line_breaks = buffer.toString().replace(/(\r\n|\n|\r)/gm,"");
+                        // this will tell us the current file being operated on
+                        console.log("The current file being operated on is: " + item);
+                        // this will tell us the number of bytes that the file stores
+                        console.log("The file contained", string_without_line_breaks.length, "bytes.");
+                        // this will go through all the content of the file and calculate the check_sum
+                        console.log("The check sum of the file:", item, "is",check_sum_of_string(string_without_line_breaks));
+                        // compute the checksum of the relative path to the file
+                        console.log("The check sum of the relative path:", final_path, "is", check_sum_of_string(final_path));
+                        // generate the artificial id and append the original extension
+                        const artificial_id_of_file = artificial_id_generator(check_sum_of_string(string_without_line_breaks), string_without_line_breaks.length, check_sum_of_string(final_path));
+                        const file_extension = path.extname(itemPath);
+                        const target_path = path.join(target_directory, artificial_id_of_file + file_extension);
+                        fs.copyFileSync(itemPath, target_path);
+                    });
+                }
+            });
+        });
+    });
+};
+
+//mkdirRecursive("/home/sergio/repo/mypt");
+//walk("/home/sergio/bot/", "/home/sergio/bot/");
+//mkdirRecursive("/home/sergio/repo/mypt");
+clone("/home/sergio/bot/", "/home/sergio/bot/", "/home/sergio/repo/mypt/");
