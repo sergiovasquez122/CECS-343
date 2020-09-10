@@ -154,7 +154,16 @@ let clone = function (dir, source_directory, target_directory) {
     });
 };
 
+/**
+ * Given two directories, clones the content of the source directory into the target directory with the content file name converted into artificial id's
+ * @param source_directory
+ * @param target_directory
+ */
+let clone_directory = function (source_directory, target_directory){
+    clone(source_directory, source_directory, target_directory);
+}
+
 //mkdirRecursive("/home/sergio/repo/mypt");
 //walk("/home/sergio/bot/", "/home/sergio/bot/");
 //mkdirRecursive("/home/sergio/repo/mypt");
-clone("/home/sergio/bot/", "/home/sergio/bot/", "/home/sergio/repo/mypt/");
+clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt/");
