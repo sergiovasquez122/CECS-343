@@ -147,6 +147,10 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
                         const artificial_id_of_file = artificial_id_generator(check_sum_of_string(string_without_line_breaks), string_without_line_breaks.length, check_sum_of_string(final_path));
                         const file_extension = path.extname(itemPath);
                         const target_path = path.join(target_directory, artificial_id_of_file + file_extension);
+                        fs.appendFile(manifest_file_name, final_path + " " + artificial_id_of_file + file_extension + '\n',
+                            function (err){
+                                if(err) return console.log(err);
+                            });
                         fs.copyFileSync(itemPath, target_path);
                     });
                 }
@@ -163,11 +167,13 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
 let clone_directory = function (source_directory, target_directory){
     mkdirRecursive(target_directory);
     let manifest_file_name = ".man-1.rc";
-    fs.writeFile(manifest_file_name, getTimeStamp() + '\n', function (err){
+    fs.writeFile(path.join(source_directory, manifest_file_name), getTimeStamp() + '\n', function (err){
         if(err) return console.log(err);
     });
-    fs.copyFileSync(path.join(manifest_file_name), path.join(manifest_file_name));
     clone(source_directory, source_directory, target_directory, manifest_file_name);
+    fs.copyFileSync(path.join(source_directory, manifest_file_name),  path.join(target_directory, manifest_file_name), function (err){
+        if(err) console.log(err);
+    });
 }
 
 //mkdirRecursive("/home/sergio/repo/mypt");
