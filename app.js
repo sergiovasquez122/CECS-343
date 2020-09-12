@@ -91,10 +91,15 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
                         const artificial_id_of_file = artificial_id_generator(check_sum_of_string(string_without_line_breaks), string_without_line_breaks.length, check_sum_of_string(final_path));
                         const file_extension = path.extname(itemPath);
                         const target_path = path.join(target_directory, artificial_id_of_file + file_extension);
-                        fs.appendFile(path.join(source_directory, manifest_file_name), final_path + " " + artificial_id_of_file + file_extension + '\n', function (err){
+                        let the_path_for_manifest = path.join(source_directory_relative, relative_path_from_source_to_item_directory);
+                        // added this line because the siska wants files that are in the top-level hierachy to have '/' instead of '/directory_name'
+                        if(the_path_for_manifest === source_directory_relative){
+                            the_path_for_manifest = "/";
+                        }
+                        fs.appendFile(path.join(source_directory, manifest_file_name), the_path_for_manifest + " " + artificial_id_of_file + file_extension + '\n', function (err){
                             if(err) console.log(err);
                         });
-                        fs.appendFile(path.join(target_directory, manifest_file_name), final_path + " " + artificial_id_of_file + file_extension + '\n', function (err){
+                        fs.appendFile(path.join(target_directory, manifest_file_name), the_path_for_manifest + " " + artificial_id_of_file + file_extension + '\n', function (err){
                             if(err) console.log(err);
                         });
                         fs.copyFile(itemPath, target_path, function (err){
@@ -127,4 +132,8 @@ let clone_directory = function (source_directory, target_directory){
 //mkdirRecursive("/home/sergio/repo/mypt");
 //walk("/home/sergio/bot/", "/home/sergio/bot/");
 //mkdirRecursive("/home/sergio/repo/mypt");
-clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt/");
+
+// asboluate_soruce destination
+// clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt/");
+clone_directory("/home/sergio/mypt/", "/home/sergio/repo/test1/");
+//clone_directory("/home/sergio/mypt2/", "/home/sergio/repo/test2/");

@@ -5,7 +5,7 @@ Project Team: Team VNSM
 Members:
 
 Victor Rodriguez: victor.rodriguez02@student.csulb.edu  
-Nam Tran: nam.tran01@student.csulb.edu  
+Nam Tran: rain  
 Sergio Vasquez: sergio.vasquez01@csulb.student.edu  
 Megan Visnaw: megan.visnaw@student.csulb.edu
 
@@ -24,6 +24,7 @@ Usage:
 --------------------------------------------------------------------------------
 
 Building Instructions and External Dependencies:
+
 
 --------------------------------------------------------------------------------
 
