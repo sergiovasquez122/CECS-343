@@ -2,10 +2,10 @@ CECS 343, Section 01/02
 Project: Version Control System - Phase One
 Project Team: Team VNSM
 
-Members:
+Members:  
 
 Victor Rodriguez: victor.rodriguez02@student.csulb.edu  
-Nam Tran: rain  
+Nam Tran: nam.tran01@student.csulb.edu  
 Sergio Vasquez: sergio.vasquez01@csulb.student.edu  
 Megan Visnaw: megan.visnaw@student.csulb.edu
 
@@ -29,5 +29,7 @@ Building Instructions and External Dependencies:
 --------------------------------------------------------------------------------
 
 BUGS:
+
+No error handling has been done for the program.
 
 --------------------------------------------------------------------------------
