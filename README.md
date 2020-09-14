@@ -25,6 +25,9 @@ Usage:
 
 Building Instructions and External Dependencies:
 
+Install [NodeJs] (https://nodejs.org/en/download/) (the latest version is 12.18.3)
+
+
 
 --------------------------------------------------------------------------------
 
