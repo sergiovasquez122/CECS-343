@@ -42,15 +42,37 @@ function artificial_id_generator(check_sum_of_file_content, bytes_in_file, check
 
 /**
  * Given an absolute path, continously create directories that are not available in the path
- * @param directory the absolute path of the paths to be create if they don't exist.
+ * code example was taken https://stackoverflow.com/questions/31645738/how-to-create-full-path-with-nodes-fs-mkdirsync
+ * @param targetDir the absolute path of the paths to be create if they don't exist.
+ * @param isRelativeToScript boolean value that directory is currently relative to the script
  */
-function mkdirRecursive(directory) {
-    let directories = directory.replace(/\/$/, '').split('/');
-    let segment = "/";
-    for (let i = 1; i < directories.length; i++) {
-        segment += path.join(directories[i]) + "/";
-        !fs.existsSync(segment) ? fs.mkdirSync(segment) : null ;
-    }
+function mkdirRecursive(targetDir, { isRelativeToScript = false } = {}) {
+    const sep = path.sep;
+    const initDir = path.isAbsolute(targetDir) ? sep : '';
+    const baseDir = isRelativeToScript ? __dirname : '.';
+
+    return targetDir.split(sep).reduce((parentDir, childDir) => {
+        const curDir = path.resolve(baseDir, parentDir, childDir);
+        try {
+            fs.mkdirSync(curDir);
+        } catch (err) {
+            if (err.code === 'EEXIST') { // curDir already exists!
+                return curDir;
+            }
+
+            // To avoid `EISDIR` error on Mac and `EACCES`-->`ENOENT` and `EPERM` on Windows.
+            if (err.code === 'ENOENT') { // Throw the original parentDir error on curDir `ENOENT` failure.
+                throw new Error(`EACCES: permission denied, mkdir '${parentDir}'`);
+            }
+
+            const caughtErr = ['EACCES', 'EPERM', 'EISDIR'].indexOf(err.code) > -1;
+            if (!caughtErr || caughtErr && curDir === path.resolve(targetDir)) {
+                throw err; // Throw if it's just the last created dir.
+            }
+        }
+
+        return curDir;
+    }, initDir);
 }
 
 /**
