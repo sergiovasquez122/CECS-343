@@ -41,11 +41,21 @@ Install [NodeJs](https://nodejs.org/en/download/) (the latest version is 12.18.3
 
 Open a CLI and switch (cd) to the directory location of the project
 
+Setup the project to use Node via Node's package
+by entering this command
+
+    npm init
+
+Type the ENTER key except for the choice  "entry point: ", which instead of ENTER, you will change to "app.js"
+
+Now enter the commands
+
+    npm install express --save
+    npm install body-parser --save
+
 Run the app 'website' on your machine. Type the command:
 
     node app.js
-
-See "App.js listening on port 3000!" in your CLI.
 
 In your browser, go to the website at
 
