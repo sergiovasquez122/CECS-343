@@ -46,7 +46,9 @@ by entering this command
 
     npm init
 
-Type the ENTER key except for the choice  "entry point: ", which instead of ENTER, you will change to "app.js"
+Press the ENTER key for each prompt except for the choice "entry point: ", which instead, you will change to "app.js"
+
+Then when asked, "Is this okay?" enter "yes"
 
 Now enter the commands
 
