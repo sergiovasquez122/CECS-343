@@ -39,7 +39,7 @@ Building Instructions and External Dependencies:
 
 Install [NodeJs](https://nodejs.org/en/download/) (the latest version is 12.18.3 as of 08/14/20)
 
-Open a CLI and switch (cd) to the directory location of the project
+Open a CLI and switch (cd) to the directory location of where you extracted the .zip
 
 Setup the project to use Node via Node's package
 by entering this command
