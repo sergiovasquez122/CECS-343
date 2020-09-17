@@ -1,6 +1,9 @@
-//requiring path and fs modules
 const path = require('path');
 const fs = require('fs');
+const bodyParser = require('body-parser');
+const express = require('express');
+let app = express();
+
 /**
  * gets the time during the call of the function in a human-readable format
  * @returns {Date} A date object that will contain the current date
@@ -77,7 +80,8 @@ function mkdirRecursive(targetDir, { isRelativeToScript = false } = {}) {
 
 /**
  * Does a depth-first search traversal computing the check sum of files, the relative path from the source and the byte size of the files
- * and then creating an artificial id for the file and copying it into the target directory
+ * and then creating an artificial id for the file and copying it into the target directory.
+ * based of of the 1st method in the link https://dustinpfister.github.io/2018/07/20/nodejs-ways-to-walk-a-file-system/
  * @param dir the current directory that is being operated on in the recursive call, given in absolute path
  * @param source_directory the directory in which the first recursive call is taken place, given in absolute path
  * @param target_directory the directory in which the all the files of the source directory will go to.
@@ -89,7 +93,7 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
         // for each item in the contents
         items.forEach((item) => {
             // get the item path
-            let itemPath = path.join(dir, item);
+            let itemPath = path.posix.join(dir, item);
             // get the stats of the item
             fs.stat(itemPath, (e, stats) => {
                 // use stats to find out
@@ -104,19 +108,20 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
                         // In order for my tree traversal to work I need to know the absolute paths from the root
                         // With this I cutoff the parts that are above the source directory file and
                         // join it with the directory that contains the item.
-                        const source_directory_relative = path.basename(source_directory);
-                        const relative_path_from_source_to_item_directory = path.relative(source_directory, dir);
-                        const final_path = path.join(source_directory_relative, relative_path_from_source_to_item_directory) + "/";
+                        const source_directory_relative = path.posix.basename(source_directory);
+                        const relative_path_from_source_to_item_directory = path.posix.relative(source_directory, dir);
+                        const final_path = path.posix.join(source_directory_relative, relative_path_from_source_to_item_directory) + "/";
                         // I am doing this because in siska's example he doesn't count \n or \r in the computation of the check sum
                         const string_without_line_breaks = buffer.toString().replace(/(\r\n|\n|\r)/gm,"");
                         // generate the artificial id and append the original extension
                         const artificial_id_of_file = artificial_id_generator(check_sum_of_string(string_without_line_breaks), string_without_line_breaks.length, check_sum_of_string(final_path));
-                        const file_extension = path.extname(itemPath);
-                        const target_path = path.join(target_directory, artificial_id_of_file + file_extension);
-                        fs.appendFile(path.join(source_directory, manifest_file_name),    artificial_id_of_file + file_extension + " " + relative_path_from_source_to_item_directory + "/" + '\n', function (err){
+                        const file_extension = path.posix.extname(itemPath);
+                        const target_path = path.posix.join(target_directory, artificial_id_of_file + file_extension);
+                        const data_to_save = artificial_id_of_file + file_extension + " " + relative_path_from_source_to_item_directory + "/" + item + '\n';
+                        fs.appendFile(path.posix.join(source_directory, manifest_file_name), data_to_save, function (err){
                             if(err) console.log(err);
                         });
-                        fs.appendFile(path.join(target_directory, manifest_file_name), artificial_id_of_file + file_extension + " " + relative_path_from_source_to_item_directory + "/" + '\n', function (err){
+                        fs.appendFile(path.posix.join(target_directory, manifest_file_name), data_to_save, function (err){
                             if(err) console.log(err);
                         });
                         fs.copyFile(itemPath, target_path, function (err){
@@ -133,24 +138,41 @@ let clone = function (dir, source_directory, target_directory, manifest_file_nam
  * Given two directories, clones the content of the source directory into the target directory with the content file name converted into artificial id's
  * @param source_directory
  * @param target_directory
+ * @param command string that represents the user input
  */
-let clone_directory = function (source_directory, target_directory){
+let clone_directory = function (source_directory, target_directory, command){
     mkdirRecursive(target_directory);
     let manifest_file_name = ".man-1.txt";
-    fs.writeFile(path.join(source_directory, manifest_file_name), getTimeStamp() + '\n', function (err){
+    fs.writeFile(path.posix.join(source_directory, manifest_file_name), getTimeStamp() + '\n'+ command + '\n', function (err){
         if(err) console.log(err);
     });
-    fs.writeFile(path.join(target_directory, manifest_file_name), getTimeStamp() + '\n', function (err){
-       if(err) console.log(err);
+    fs.writeFile(path.posix.join(target_directory, manifest_file_name), getTimeStamp() + '\n'+ command +'\n', function (err){
+        if(err) console.log(err);
     });
     clone(source_directory, source_directory, target_directory, manifest_file_name);
 }
 
-//mkdirRecursive("/home/sergio/repo/mypt");
-//walk("/home/sergio/bot/", "/home/sergio/bot/");
-//mkdirRecursive("/home/sergio/repo/mypt");
+function executeCmd(command){
+    let component = command.split(' ');
+    switch(component[0]){
+        case "createRepo" :
+            clone_directory(component[1], component[2],command)
+            break;
+    }
+}
+//Driver Code
+app.use(bodyParser.urlencoded({extended: true}));
+//Handles commands entered into webpage
+app.post('/get_user_request', (req,res) => {
+    res.send(executeCmd(req.body.Request_box));
+});
 
-// asboluate_soruce destination
-// clone_directory("/home/sergio/bot/", "/home/sergio/repo/mypt/");
-clone_directory("/home/sergio/mypt/", "/home/sergio/repo/test1/");
-//clone_directory("/home/sergio/mypt2/", "/home/sergio/repo/test2/");
+//Handles serving the landing page 
+app.get('/', function(req,res){
+    res.sendFile(__dirname + '/index.html');
+});
+
+//express listening on port 3000
+app.listen(3000);
+
+module.exports = app;
