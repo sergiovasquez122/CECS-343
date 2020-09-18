@@ -65,7 +65,7 @@ In your browser, go to the website at
 
 --------------------------------------------------------------------------------
 
-BUGS:
+WARNINGS:
 
 No error handling has been done for the program.
 
