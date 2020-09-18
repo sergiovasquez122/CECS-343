@@ -9,9 +9,7 @@
  * This is the backend of the project that provides all the functionality
  * once the user has entered an input.
  */
-
-
-
+// Importing necessary libraries
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
