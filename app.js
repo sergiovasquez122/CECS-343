@@ -1,3 +1,17 @@
+/*************************************************************************
+ * Authors:
+ * Victor Rodriguez: victor.rodriguez02@student.csulb.edu
+ * Nam Tran: nam.tran01@student.csulb.edu
+ * Sergio Vasquez: sergio.vasquez01@csulb.student.edu
+ * Megan Visnaw: megan.visnaw@student.csulb.edu
+ *
+ * Description:
+ * This is the backend of the project that provides all the functionality
+ * once the user has entered an input.
+ */
+
+
+
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -152,6 +166,10 @@ let clone_directory = function (source_directory, target_directory, command){
     clone(source_directory, source_directory, target_directory, manifest_file_name);
 }
 
+/**
+ * Given a string do a particular function execution
+ * @param command the string that was inputted by a user
+ */
 function executeCmd(command){
     let component = command.split(' ');
     switch(component[0]){
