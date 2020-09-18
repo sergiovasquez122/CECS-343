@@ -41,6 +41,12 @@ Install [NodeJs](https://nodejs.org/en/download/) (the latest version is 12.18.3
 
 Open a CLI and switch (cd) to the directory location of where you extracted the .zip
 
+Enter the command
+
+    mv app.js.txt app.js
+
+to rename the app.js.txt back to a javascript file
+
 Setup the project to use Node via Node's package
 by entering this command
 

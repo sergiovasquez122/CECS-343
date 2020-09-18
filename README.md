@@ -1,13 +1,13 @@
-CECS 343, Section 01/02  
-Project: Version Control System - Phase One  
-Project Team: Team VNSM  
+CECS 343, Section 01/02
+Project: Version Control System - Phase One
+Project Team: Team VNSM
 
 Members:
 
-Victor Rodriguez: victor.rodriguez02@student.csulb.edu  
-Nam Tran: nam.tran01@student.csulb.edu  
-Sergio Vasquez: sergio.vasquez01@csulb.student.edu  
-Megan Visnaw: megan.visnaw@student.csulb.edu  
+Victor Rodriguez: victor.rodriguez02@student.csulb.edu
+Nam Tran: nam.tran01@student.csulb.edu
+Sergio Vasquez: sergio.vasquez01@csulb.student.edu
+Megan Visnaw: megan.visnaw@student.csulb.edu
 
 --------------------------------------------------------------------------------
 
@@ -40,6 +40,12 @@ Building Instructions and External Dependencies:
 Install [NodeJs](https://nodejs.org/en/download/) (the latest version is 12.18.3 as of 08/14/20)
 
 Open a CLI and switch (cd) to the directory location of where you extracted the .zip
+
+Enter the command
+
+    mv app.js.txt app.js
+
+to rename the app.js.txt back to a javascript file
 
 Setup the project to use Node via Node's package
 by entering this command
