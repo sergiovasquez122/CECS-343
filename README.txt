@@ -1,4 +1,4 @@
-CECS 343, Section 01/02
+CECS 343: Section 01/02
 Project: Version Control System - Phase One
 Project Team: Team VNSM
 
