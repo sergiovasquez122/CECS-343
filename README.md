@@ -1,8 +1,8 @@
 CECS 343: Section 01/02  
-Project: Version Control System - Phase One  
+Project Name: Version Control System - Phase One  
 Project Team: Team VNSM  
 
-Members:
+Project Members:
 
 Victor Rodriguez: victor.rodriguez02@student.csulb.edu  
 Nam Tran: nam.tran01@student.csulb.edu  
@@ -17,25 +17,21 @@ This is the first part of our VCS (Version Control System) project. It only
 implements an initial use case: Create Repository. It also makes a number of
 simplifying assumptions in order to get to working software quickly.
 
---------------------------------------------------------------------------------
-
-Usage:
-
-Initialize repository: createRepo sourceDirectory targetDirectory (both arguments given as absolute paths)
-
-example:
-
-on a linux machine with user name 'sergio'
-
-    createRepo /home/sergio/mypt/ /home/sergio/repo/mypt_project/
-
-on a window machine with user name 'megpe'
-
-    createRepo /Users/megpe/mypt/ /Users/megpe/repo/test1/
 
 --------------------------------------------------------------------------------
+Contents:
 
-Building Instructions and External Dependencies:
+app.js.txt  
+index.html  
+
+--------------------------------------------------------------------------------
+External requirements:
+
+Node.js  
+Express.js   
+
+--------------------------------------------------------------------------------
+Building Instructions and Installing External Dependencies:
 
 Install [NodeJs](https://nodejs.org/en/download/) (the latest version is 12.18.3 as of 08/14/20)
 
@@ -71,8 +67,32 @@ In your browser, go to the website at
 
 --------------------------------------------------------------------------------
 
-WARNINGS:
+Sample invocation and result:
 
-No error handling has been done for the program.
+Initialize repository: createRepo sourceDirectory targetDirectory (both arguments given as absolute paths)
+
+example:
+
+on a linux machine with user name 'sergio'
+
+    createRepo /home/sergio/mypt/ /home/sergio/repo/mypt_project/
+
+on a window machine with user name 'megpe'
+
+    createRepo /Users/megpe/mypt/ /Users/megpe/repo/test1/
+
+--------------------------------------------------------------------------------
+
+Features:
+Create repositories.
+
+--------------------------------------------------------------------------------
+
+BUGS / WARNINGS:
+
+No error handling has been done for the program.  
+ENOENT: attempting to access a file not found in the directory / path  
+EMFILE: attempting to open a file with too many files inside
+
 
 --------------------------------------------------------------------------------
