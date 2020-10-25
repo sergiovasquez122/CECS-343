@@ -91,7 +91,7 @@ Create repositories.
 BUGS / WARNINGS:
 
 No error handling has been done for the program.  
-o
+ENOENT: attempting to access a file not found in the directory / path  
 EMFILE: attempting to open a file with too many files inside
 
 
