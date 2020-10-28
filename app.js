@@ -317,26 +317,20 @@ function executeCmd(command){
         case "createRepo" :
             clone_directory(component[1], component[2], command)
             return (Promise.resolve("Repo Created"))
-            break;
         case "checkin":
-            checkin(component[1], component[2], command)
+            check_in(component[1], component[2], command)
             return (Promise.resolve("Successfully Checked-In " + component[1] + " to " + component[2]))
-            break;
         case "checkout":
             checkout(component[1],component[2], command)
             return (Promise.resolve("Successfully Checked " + component[1] + " out to " + component[2]))
-            break;
         case "label" :
             label_command(component[1],component[2],component[3])
-            return (Promise.resolve("Successfuly added the label " + component[3] + "to the file " + component[2]))
-            break;
+            return (Promise.resolve("Successfuly added the label " + component[3] + " to the file " + component[2]))
         case "list":
             return (Promise.resolve(list(component[1])))
-            break;
     }
 
 }
-
 
 //Driver Code
 app.use(bodyParser.urlencoded({extended: true}));
