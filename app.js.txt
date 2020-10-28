@@ -1,4 +1,4 @@
-/*************************************************************************
+*************************************************************************
  * Authors:
  * Victor Rodriguez: victor.rodriguez02@student.csulb.edu
  * Nam Tran: nam.tran01@student.csulb.edu

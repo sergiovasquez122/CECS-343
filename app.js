@@ -107,7 +107,7 @@ let list = function(source_directory){
         result += files[i] + "\n";
     }
     for(const key of hash_table.keys())
-        result += key.toString() + " " + hash_table.get(key) + "\n";
+        result += key.toString() + "," + hash_table.get(key) + "\n";
     return result;
 }
 
@@ -124,7 +124,7 @@ let load_labeling = function(source_directory){
             let lrs = new line_reader(file_path);
             let lines = lrs.toLines();
             for(let i = 0;i < lines.length;i++){
-                let tokens = lines[i].split(" ");
+                let tokens = lines[i].split(",");
                 hash_table.set(tokens[0], tokens[1]);
             }
         }
@@ -149,7 +149,7 @@ let label_command = function(source_directory, manifest_or_label, new_labeling){
         } else {
             value = manifest_or_label;
         }
-        fs.appendFileSync(path.posix.resolve(source_directory, ".labeling.txt"), new_labeling + " " + value + os.EOL);
+        fs.appendFileSync(path.posix.resolve(source_directory, ".labeling.txt"), new_labeling + "," + value + os.EOL);
     } catch (err){
         throw err;
     }
