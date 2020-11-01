@@ -122,8 +122,6 @@ List all repository versions.
 
 BUGS / WARNINGS:
 
-No error handling has been done for the program.
-ENOENT: attempting to access a file not found in the directory / path
 EMFILE: attempting to open a file with too many files inside
 TypeError [ERR_INVALID_ARG_TYPE] [ERR_INVALID_ARG_TYPE]: failed in providing required paramaters.
 Cannot read property 'then' of undefined: attempting to call a function that doesn't exist. (EX: ccheckin)
