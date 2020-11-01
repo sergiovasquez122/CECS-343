@@ -1,0 +1,145 @@
+original project tree
+
+/home/sergio/CECS-343/
+▾  343-01-P1-VNSM/
+     app.js.txt
+     index.html
+     README.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   README.md
+   README.txt
+
+running createRepo /home/sergio/CECS-343/ /home/sergio/repo_directory1/
+
+/home/sergio/repo_directory1/
+   .man-1.txt
+   P1678-L8690-C2826.js
+   P1678-L8690-C2826.txt
+   P1678-L8690-C7802.txt
+   P1724-L2560-C2826.txt
+   P4815-L2630-C2826.md
+   P4815-L2630-C7802.txt
+   P4861-L658-C2826.html
+   P4861-L658-C7802.html
+   P8422-L4604-C2826.zip
+
+output after running list /home/sergio/repo_directory1/
+
+.man-1.txt
+
+output after running checkout /home/sergio/repo_directory/.man-1.txt /home/sergio/VCS/
+
+/home/sergio/VCS/
+▾  343-01-P1-VNSM/
+     app.js.txt
+     index.html
+     README.txt
+   .man-1.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   README.md
+   README.txt
+
+output after running label /home/sergio/repo_directory1 .man-1.txt sergio_new_label
+
+/home/sergio/repo_directory1/
+   .labeling.txt
+   .man-1.txt
+   P1678-L8690-C2826.js
+   P1678-L8690-C2826.txt
+   P1678-L8690-C7802.txt
+   P1724-L2560-C2826.txt
+   P4815-L2630-C2826.md
+   P4815-L2630-C7802.txt
+   P4861-L658-C2826.html
+   P4861-L658-C7802.html
+   P8422-L4604-C2826.zip
+
+content of .labeling.txt
+sergio_new_label,.man-1.txt
+
+output after running list /home/sergio/repo_directory1/
+
+.man-1.txt
+sergio_new_label,.man-1.txt
+
+modified VCS
+▾  VCS/
+  ▾  343-01-P1-VNSM/
+       app.js.txt
+       index.html
+       README.txt
+     .man-1.txt
+     .man-2.txt
+     343-01-P1-VNSM.zip
+     app.js
+     app.js.txt
+     index.html
+     new_file.txt
+     README.md
+     README.txt
+
+output after running check-in /home/sergio/VCS /home/sergio/repo_directory1/ 
+
+/home/sergio/repo_directory1/
+   .labeling.txt
+   .man-1.txt
+   .man-2.txt
+   P1678-L8690-C1385.js
+   P1678-L8690-C2826.js
+   P1678-L8690-C2826.txt
+   P1678-L8690-C6121.txt
+   P1678-L8690-C7802.txt
+   P1724-L2560-C1385.txt
+   P1724-L2560-C2826.txt
+   P4815-L2630-C1385.md
+   P4815-L2630-C2826.md
+   P4815-L2630-C6121.txt
+   P4815-L2630-C7802.txt
+   P4861-L658-C1385.html
+   P4861-L658-C2826.html
+   P4861-L658-C6121.html
+   P4861-L658-C7802.html
+   P5946-L8718-C1385.txt
+   P6780-L14-C1385.txt
+   P8422-L4604-C1385.zip
+   P8422-L4604-C2826.zip
+
+output after running label /home/sergio/repo_directory1/.man-2.txt bob_#2 and label /home/sergio/repo_directory1/.man-2.txt alice_1 in .labeling.txt
+
+sergio_new_label,.man-1.txt
+alice_1,.man-2.txt
+bob_#2,.man-2.txt
+
+output after running checkout /home/sergio/repo_directory1/alice_1 alice_version 
+
+/home/sergio/alice_version/
+▾  343-01-P1-VNSM/
+     app.js.txt
+     index.html
+     README.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   README.md
+   README.txt
+
+/home/sergio/bob_#2/
+▾  343-01-P1-VNSM/
+     app.js.txt
+     index.html
+     README.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   README.md
+   README.txt

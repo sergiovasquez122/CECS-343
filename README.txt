@@ -1,34 +1,36 @@
 CECS 343: Section 01/02  
-Project Name: Version Control System - Phase One  
-Project Team: Team VNSM  
+Project Name: Version Control System - Phase two
+Project Team: Team VNSM
 
 Project Members:
 
-Victor Rodriguez: victor.rodriguez02@student.csulb.edu  
-Nam Tran: nam.tran01@student.csulb.edu  
-Sergio Vasquez: sergio.vasquez01@csulb.student.edu  
-Megan Visnaw: megan.visnaw@student.csulb.edu  
+Victor Rodriguez: victor.rodriguez02@student.csulb.edu
+Nam Tran: nam.tran01@student.csulb.edu
+Sergio Vasquez: sergio.vasquez01@csulb.student.edu
+Megan Visnaw: megan.visnaw@student.csulb.edu
 
 --------------------------------------------------------------------------------
 
 Introduction:
 
-This is the first part of our VCS (Version Control System) project. It only
-implements an initial use case: Create Repository. It also makes a number of
-simplifying assumptions in order to get to working software quickly.
+This is the second part of our VCS (Version Control System) project. Currently
+the VCS has implemented the following use cases: Create Repository, Check-out,
+Check-in, Listing existing manifest files, Labeling manifest files. Furthermore,
+our implementation of said use cases has a number of assumptions to ensure a working
+product in a timely manner.
 
 
 --------------------------------------------------------------------------------
 Contents:
 
-app.js.txt  
-index.html  
+app.js.txt
+index.html
 
 --------------------------------------------------------------------------------
 External requirements:
 
-Node.js  
-Express.js   
+Node.js
+Express.js
 
 --------------------------------------------------------------------------------
 Building Instructions and Installing External Dependencies:
@@ -56,6 +58,8 @@ Now enter the commands
 
     npm install express --save
     npm install body-parser --save
+    npm install glob-all --save
+    npm install line-reader-sync --save
 
 Run the app 'website' on your machine. Type the command:
 
@@ -74,25 +78,52 @@ Initialize repository: createRepo sourceDirectory targetDirectory (both argument
 example:
 
 on a linux machine with user name 'sergio'
-
-    createRepo /home/sergio/mypt/ /home/sergio/repo/mypt_project/
+	Example:
+		createRepo /home/sergio/mypt/ /home/sergio/repo/mypt_project/
 
 on a window machine with user name 'megpe'
+    	Example:
+		createRepo /Users/megpe/mypt/ /Users/megpe/repo/test1/
 
-    createRepo /Users/megpe/mypt/ /Users/megpe/repo/test1/
+
+
+Update a Repository: checkin source_Directory repo_Directory.
+	Example:
+		checkin /home/sergio/mypt/  /home/sergio/repo/mypt_project/new_Project/
+
+
+
+Clone a Repository: checkout manifest_File_Directory target_Directory
+     	Example:
+		checkout /home/sergio/repo/mypt_project/new_Project/  /home/sergio/WorkBench/CurrentProject/
+
+
+
+Label a manifest file: label source_Directory manifest_Or_Label new_Label
+     	Example:
+		label /home/sergio/mypt/ newLabel newLabel
+
+
+
+Display all manifest files & their lables: label source_Directory
+     	Example:
+		list /home/sergio/mypt/
 
 --------------------------------------------------------------------------------
 
 Features:
 Create repositories.
+Update changes to a repository.
+Clone / recreate a working repository.
+Label a version of a repository.
+List all repository versions.
 
 --------------------------------------------------------------------------------
 
 BUGS / WARNINGS:
 
-No error handling has been done for the program.  
-o
 EMFILE: attempting to open a file with too many files inside
-
+TypeError [ERR_INVALID_ARG_TYPE] [ERR_INVALID_ARG_TYPE]: failed in providing required paramaters.
+Cannot read property 'then' of undefined: attempting to call a function that doesn't exist. (EX: ccheckin)
 
 --------------------------------------------------------------------------------
