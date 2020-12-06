@@ -329,14 +329,13 @@ function executeCmd(command){
         case "list":
             return (Promise.resolve(list(component[1])))
         case "mergeOut":
-            merge_mediator(component[1],component[2]) // comp1 = target dir && comp 2 == src dir
+            merge_mediator(component[1],component[2], component[3]) // comp1 == repo dir && comp 2 == mani-file && comp 3 == proj tree
             //^^name may change, just what I put in for now
-            return(Promise.resolve((component[1] + " ready to merge to " + component[2] + "\n Please manually merge any 3-way merges before calling mergeIn.")))
+           return(Promise.resolve((component[3] + " ready to merge to " + component[1] + "\n Please manually merge any 3-way merges before calling mergeIn.")))
         case "mergeIn":
-            check_in(component[1], component[2]); //comp 1 == target diir  && comp 2 == repo
-            //^^Not sure if this is how mergeIn is supposed to be approached, can change later after more of the proj is completed
-            return (Promise.resolve("Successfully Checked-In " + component[1] + " to " + component[2]))
-    }
+            merge_in(component[1], component[2]); //comp 1 == repo dir  && comp 2 == proj tree
+            //mergeIn func would just call check_in [I'm assuming] so we can change it to check_in func if that's the case
+            return (Promise.resolve("Successfully Checked-In " + component[2] + " to " + component[1]))
 
 }
 
