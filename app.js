@@ -308,33 +308,31 @@ let check_in = function(source_directory, target_directory, command){
 }
 
 /**
- * Given a string do a particular function execution
+ * Given a string do a particular function execution and output the results of doing said function
  * @param command the string that was inputted by a user
  */
 function executeCmd(command){
     let component = command.split(' ');
     switch(component[0]){
         case "createRepo" :
-            clone_directory(component[1], component[2], command)
+            clone_directory(component[1], component[2], command) //comp1 == src dir && comp2 == repo dir
             return (Promise.resolve("Repo Created"))
         case "checkin":
-            check_in(component[1], component[2], command)
+            check_in(component[1], component[2], command) //comp1 == src dir && comp2 == target dir
             return (Promise.resolve("Successfully Checked-In " + component[1] + " to " + component[2]))
         case "checkout":
-            checkout(component[1],component[2], command)
+            checkout(component[1],component[2], command) //comp1 == mani-file dir && comp2 == target dir
             return (Promise.resolve("Successfully Checked " + component[1] + " out to " + component[2]))
         case "label" :
-            label_command(component[1],component[2],component[3])
+            label_command(component[1],component[2],component[3]) //comp1 == src dir && comp2 == mani-file OR label && comp3 == new label
             return (Promise.resolve("Successfuly added the label " + component[3] + " to the file " + component[2]))
         case "list":
-            return (Promise.resolve(list(component[1])))
+            return (Promise.resolve(list(component[1]))) //comp1 == repo directory
         case "mergeOut":
-            merge_mediator(component[1],component[2], component[3]) // comp1 == repo dir && comp 2 == mani-file && comp 3 == proj tree
-            //^^name may change, just what I put in for now
-           return(Promise.resolve((component[3] + " ready to merge to " + component[1] + "\n Please manually merge any 3-way merges before calling mergeIn.")))
+            merge_out(component[1],component[2], component[3], command) //comp1 == repo dir && comp 2 == mani-file && comp 3 == proj tree
+            return(Promise.resolve((component[3] + " ready to merge to " + component[1] + "\n Please manually merge any 3-way merges before calling mergeIn.")))
         case "mergeIn":
-            merge_in(component[1], component[2]); //comp 1 == repo dir  && comp 2 == proj tree
-            //mergeIn func would just call check_in [I'm assuming] so we can change it to check_in func if that's the case
+            merge_in(component[1], component[2], command); //comp 1 == repo dir  && comp 2 == proj tree
             return (Promise.resolve("Successfully Checked-In " + component[2] + " to " + component[1]))
 
 }
