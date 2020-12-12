@@ -1,5 +1,5 @@
 CECS 343: Section 01/02  
-Project Name: Version Control System - Phase two
+Project Name: Version Control System - Phase Three
 Project Team: Team VNSM
 
 Project Members:
@@ -13,11 +13,12 @@ Megan Visnaw: megan.visnaw@student.csulb.edu
 
 Introduction:
 
-This is the second part of our VCS (Version Control System) project. Currently
+This is the third part of our VCS (Version Control System) project. Currently
 the VCS has implemented the following use cases: Create Repository, Check-out,
-Check-in, Listing existing manifest files, Labeling manifest files. Furthermore,
-our implementation of said use cases has a number of assumptions to ensure a working
-product in a timely manner.
+Check-in, Listing existing manifest files, Labeling manifest files, Merging the contents 
+of a project tree and a repository, Merging the contents of a project tree and a 
+repository after a three-way merge . Furthermore, our implementation of said use 
+cases has a number of assumptions to ensure a working product in a timely manner.
 
 
 --------------------------------------------------------------------------------
@@ -104,10 +105,17 @@ Label a manifest file: label source_Directory manifest_Or_Label new_Label
 		label /home/sergio/mypt/ newLabel newLabel
 
 
-
 Display all manifest files & their lables: label source_Directory
      	Example:
 		list /home/sergio/mypt/
+
+
+Amalgamate the contents of a repository and a project tree.
+see siska_merge_test.txt
+
+
+Combine a repository directory and a project directory after a three way merge. 
+see siska_merge_test.txt
 
 --------------------------------------------------------------------------------
 
@@ -117,6 +125,8 @@ Update changes to a repository.
 Clone / recreate a working repository.
 Label a version of a repository.
 List all repository versions.
+Merge the content of a repository and a project tree's after a three-way merge.
+Merge the content of a repository and a project tree. 
 
 --------------------------------------------------------------------------------
 
@@ -125,5 +135,9 @@ BUGS / WARNINGS:
 EMFILE: attempting to open a file with too many files inside
 TypeError [ERR_INVALID_ARG_TYPE] [ERR_INVALID_ARG_TYPE]: failed in providing required paramaters.
 Cannot read property 'then' of undefined: attempting to call a function that doesn't exist. (EX: ccheckin)
+ENOENT: no such file or directory, open: Using an incorrect file path / location.
+Cannot read property '0' of null: When you plan to checkin and the file that you specified does not exist. 
+If you only put one param for labeling it works but you get UNDEFINED as one label:  Not really an error?
+[ERR_INVALID_ARG_TYPE] [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string: Only having one location / paramter in functions that require two (createRepo,checkin,checkout, mergeout,mergein)
 
 --------------------------------------------------------------------------------
