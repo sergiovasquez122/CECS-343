@@ -1,0 +1,250 @@
+original directory
+/home/sergio/test_directory/
+▸  343-01-P1-VNSM/
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   README.md
+   README.txt
+
+
+/home/sergio/repo_directory1/
+   .labeling.txt
+   .man-1.txt
+   P1678-L8690-C1107.txt
+   P1678-L8690-C2142.txt
+   P1678-L8690-C2993.txt
+   P1678-L8690-C6371.js
+   P1678-L8690-C7234.js
+   P1678-L8690-C8121.js
+   P1724-L2560-C6371.txt
+   P1724-L2560-C7234.txt
+   P1724-L2560-C8121.txt
+   P4815-L2630-C1107.txt
+   P4815-L2630-C2142.txt
+   P4815-L2630-C2993.txt
+   P4815-L2630-C6371.md
+   P4815-L2630-C7234.md
+   P4815-L2630-C8121.md
+   P4861-L658-C1107.html
+   P4861-L658-C2142.html
+   P4861-L658-C2993.html
+   P4861-L658-C6371.html
+   P4861-L658-C7234.html
+   P4861-L658-C8121.html
+   P5946-L8718-C6371.txt
+   P5946-L8718-C7234.txt
+   P5946-L8718-C8121.txt
+   P6780-L14-C7234.txt
+   P6780-L14-C8121.txt
+   P8422-L4604-C6371.zip
+   P8422-L4604-C7234.zip
+   P8422-L4604-C8121.zip
+
+checkout to new directory 
+
+/home/sergio/alice_version/
+▸  343-01-P1-VNSM/
+   .man-1.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   README.md
+   README.txt
+
+merging alice back to repo with .man-1.txt, results in no changes since alice was not modified but will create two new manifest files
+
+/home/sergio/alice_version/
+▸  343-01-P1-VNSM/
+   .man-1.txt
+   .man-2.txt
+   .man-3.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   README.md
+   README.txt
+
+checking out to new directory bob .man-3.txt from repo
+
+/home/sergio/bob_version/
+▸  343-01-P1-VNSM/
+   .man-3.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   README.md
+   README.txt
+
+adding 'new_file2.txt' to bob and deleting 'new_file.txt'
+
+/home/sergio/bob_version/
+▸  343-01-P1-VNSM/
+   .man-3.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file2.txt
+   README.md
+   README.txt
+
+mergeout bob to repo with .man-3.txt, it's original creation. This will give bob back new_file.txt and leave every other file unchanged. this will add new_file2.txt to the repo.
+
+/home/sergio/bob_version/
+▸  343-01-P1-VNSM/
+   .man-3.txt
+   .man-4.txt
+   .man-5.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   new_file2.txt
+   README.md
+   README.txt
+
+/home/sergio/repo_directory1/
+   .labeling.txt
+   .man-1.txt
+   .man-2.txt
+   .man-3.txt
+   .man-4.txt
+   .man-5.txt
+   P1678-L8690-C1107.txt
+   P1678-L8690-C2142.txt
+   P1678-L8690-C2993.txt
+   P1678-L8690-C6371.js
+   P1678-L8690-C7234.js
+   P1678-L8690-C8121.js
+   P1724-L2560-C6371.txt
+   P1724-L2560-C7234.txt
+   P1724-L2560-C8121.txt
+   P4815-L2630-C1107.txt
+   P4815-L2630-C2142.txt
+   P4815-L2630-C2993.txt
+   P4815-L2630-C6371.md
+   P4815-L2630-C7234.md
+   P4815-L2630-C8121.md
+   P4861-L658-C1107.html
+   P4861-L658-C2142.html
+   P4861-L658-C2993.html
+   P4861-L658-C6371.html
+   P4861-L658-C7234.html
+   P4861-L658-C8121.html
+   P5946-L8718-C6371.txt
+   P5946-L8718-C7234.txt
+   P5946-L8718-C8121.txt
+   P6789-L0-C0.txt
+   P6780-L14-C7234.txt
+   P6780-L14-C8121.txt
+   P8422-L4604-C6371.zip
+   P8422-L4604-C7234.zip
+   P8422-L4604-C8121.zip
+
+checkout .man-5.txt into directory /home/sergio/joe_version/
+/home/sergio/joe_version/
+▸  343-01-P1-VNSM/
+   .man-3.txt
+   .man-4.txt
+   .man-5.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   new_file2.txt
+   README.md
+   README.txt
+
+delete all the content of README.md and 
+add the content of new_file.txt to new_file2.txt
+
+mergeout joe version to .man-5.txt
+
+/home/sergio/joe_version/
+▸  343-01-P1-VNSM/
+   .man-3.txt
+   .man-4.txt
+   .man-5.txt
+   .man-6.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   new_file2_MT.txt
+   new_file2_MG.txt
+   new_file2_MR.txt
+   README.txt
+   README_MT.md
+   README_MR.md
+   README_MG.md
+
+keeping bob version of new_file and README
+then mergein
+
+/home/sergio/joe_version/
+▸  343-01-P1-VNSM/
+   .man-3.txt
+   .man-4.txt
+   .man-5.txt
+   .man-6.txt
+   .man-7.txt
+   343-01-P1-VNSM.zip
+   app.js
+   app.js.txt
+   index.html
+   new_file.txt
+   new_file2.txt
+   README.md
+   README.txt
+
+/home/sergio/repo_directory1/
+   .labeling.txt
+   .man-1.txt
+   .man-2.txt
+   .man-3.txt
+   .man-4.txt
+   .man-5.txt
+   .man-6.txt
+   .man-7.txt
+   P1678-L8690-C1107.txt
+   P1678-L8690-C2142.txt
+   P1678-L8690-C2993.txt
+   P1678-L8690-C6371.js
+   P1678-L8690-C7234.js
+   P1678-L8690-C8121.js
+   P1724-L2560-C6371.txt
+   P1724-L2560-C7234.txt
+   P1724-L2560-C8121.txt
+   P4815-L2630-C1107.txt
+   P4815-L2630-C2142.txt
+   P4815-L2630-C2993.txt
+   P4815-L2630-C6371.md
+   P4815-L2630-C7234.md
+   P4815-L2630-C8121.md
+   P4861-L658-C1107.html
+   P4861-L658-C2142.html
+   P4861-L658-C2993.html
+   P4861-L658-C6371.html
+   P4861-L658-C7234.html
+   P4861-L658-C8121.html
+   P5946-L8718-C6371.txt
+   P5946-L8718-C7234.txt
+   P5946-L8718-C8121.txt
+   P6789-L0-C0.txt
+   P6780-L14-C7234.txt
+   P6780-L14-C8121.txt
+   P8422-L4604-C6371.zip
+   P8422-L4604-C7234.zip
+   P8422-L4604-C8121.zip

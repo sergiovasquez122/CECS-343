@@ -1,0 +1,29 @@
+<!--
+   Authors:
+   Victor Rodriguez: victor.rodriguez02@student.csulb.edu
+   Nam Tran: nam.tran01@student.csulb.edu
+   Sergio Vasquez: sergio.vasquez01@csulb.student.edu
+   Megan Visnaw: megan.visnaw@student.csulb.edu
+   Description:
+   This is the frontend of the program, it controls what is displayed when
+   the user logs in locally.
+-->
+<html>
+<head></head>
+<body>
+<h1> User Request </h1>
+<form action = "/get_user_request" method ="POST">
+  <input type="text" placeholder="Type the request" name = "Request_box" size = "80"><br>
+  <button type = "submit">Click to run Cmd </button><br>
+</form>
+
+<p> 1. createRepo< source_directory > < repo_directory > </p>
+<p> 2. checkin < source_directory > < target_directory > </p>
+<p> 3. checkout < manifest_file_directory > < target_directory > </p>
+<p> 4. label  < source_directory > < manifest_or_label > < new_label ></p>
+<p> 5. list < repo_directory > </p>
+<p> 6. mergeOut < repo_directory > < manifest_file > < project_tree ></p>
+<p> 7. mergeIn < repo_directory > < project_tree > </p>
+
+</body>
+</html>
